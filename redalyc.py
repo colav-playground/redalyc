@@ -324,6 +324,7 @@ def main(nini,nend,apikey):
         time.sleep(random.uniform(0.9*t,1.1*t))
         
 #======BEGIN Graphical mode (Self contained)============
+#FROM https://www.python-course.eu/tkinter_entry_widgets.php
 #from redalyc import *
 GUI=True
 try:
@@ -371,10 +372,14 @@ def maingui():
 #======END Graphical mode ============
 
 def run():
+    #GUI=False #DEBUG purposes
     if GUI:
         maingui()
     else:
         import sys
+        if len(sys.argv)<4:
+            sys.exit('USAGE: {} N_ini N_end API_key'.format(sys.argv[0]))
+            
         nini=int( sys.argv[1] )
         nend=int( sys.argv[2] )
         apikey=sys.argv[3]#getpass.getpass('Api key')
