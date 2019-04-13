@@ -280,10 +280,7 @@ def get_cites_refs(browser,url,maxcites=65,t=60):
     time.sleep(random.uniform(0.9*t,1.1*t))
     return refs
 
-def main():
-    nini=int( sys.argv[1] )
-    nend=int( sys.argv[2] )
-    apikey=sys.argv[3]#getpass.getpass('Api key')
+def main(nini,nend,apikey):
     n=nend-int(nini)                
     T=12 #hours of search
     t=T/n*3600 # [s] query time
@@ -325,6 +322,62 @@ def main():
         dfgs=dfgs.append(gsd,ignore_index=True )
         dfgs.to_json('rdlyc_{}_{}.json'.format(nini,nend))
         time.sleep(random.uniform(0.9*t,1.1*t))
+        
+#======BEGIN Graphical mode (Self contained)============
+#from redalyc import *
+GUI=True
+try:
+    from tkinter import *
+    import tkinter.messagebox
+except ImportError:
+    print('WARNING:\n try sudo apt-get install python3-tk\n for GUI mode.')
+    prnt('Going to text mode..')
+    GUI=False
+        
+
+fields = ('Initial article', 'Final article', 'API key')
+def makeform(root, fields):
+    entries = {}
+    for field in fields:
+        row = Frame(root)
+        lab = Label(row, width=22, text=field+": ", anchor='w')
+        ent = Entry(row)
+        row.pack(side=TOP, fill=X, padx=5, pady=5)
+        lab.pack(side=LEFT)
+        ent.pack(side=RIGHT, expand=YES, fill=X)
+        #Relevant dictionary
+        entries[field] = ent
+    return entries
+
+def runcommand(entries):
+    nini=int( entries['Initial article'].get() )
+    nend=int( entries['Final article'].get() )
+    apikey=entries['API key'].get()
+    main(nini,nend,apikey) # main console mode
+    tkinter.messagebox.showinfo(message='Finished! Upload output:\n rdlyc_{}_{}.json'.format(nini,nend))
+
+def maingui():
+    root = Tk()
+    ents = makeform(root, fields)
+    root.bind('<Return>', (lambda event, e=ents: fetch(e)))   
+    b1 = Button(root, text='Query GS (output in console)',
+          command=(lambda e=ents: runcommand(e)))
+    b1.pack(side=LEFT, padx=5, pady=5)
+    b3 = Button(root, text='Quit', command=root.quit)
+    b3.pack(side=LEFT, padx=5, pady=5)
+    root.mainloop()
+        
+
+#======END Graphical mode ============
 
 if __name__ == "__main__":
-    main()
+    print(GUI)
+    if GUI:
+        maingui()
+    else:
+        import sys
+        nini=int( sys.argv[1] )
+        nend=int( sys.argv[2] )
+        apikey=sys.argv[3]#getpass.getpass('Api key')
+        main(nini,nend,apikey) 
+        print( 'Finished! Upload output:\n rdlyc_{}_{}.json'.format(nini,nend) )
