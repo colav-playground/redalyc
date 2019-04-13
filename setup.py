@@ -11,7 +11,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'redalyc=redalyc:main'
+            'redalyc=redalyc:run'
         ]
     }
 )

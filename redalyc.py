@@ -281,7 +281,7 @@ def get_cites_refs(browser,url,maxcites=65,t=60):
     return refs
 
 def main(nini,nend,apikey):
-    n=nend-int(nini)                
+    n=nend-nini                
     T=12 #hours of search
     t=T/n*3600 # [s] query time
     t=60
@@ -360,7 +360,7 @@ def maingui():
     root = Tk()
     ents = makeform(root, fields)
     root.bind('<Return>', (lambda event, e=ents: fetch(e)))   
-    b1 = Button(root, text='Query GS (output in console)',
+    b1 = Button(root, text='Seach Google Scholar (output in console)',
           command=(lambda e=ents: runcommand(e)))
     b1.pack(side=LEFT, padx=5, pady=5)
     b3 = Button(root, text='Quit', command=root.quit)
@@ -370,8 +370,7 @@ def maingui():
 
 #======END Graphical mode ============
 
-if __name__ == "__main__":
-    print(GUI)
+def run():
     if GUI:
         maingui()
     else:
@@ -381,3 +380,6 @@ if __name__ == "__main__":
         apikey=sys.argv[3]#getpass.getpass('Api key')
         main(nini,nend,apikey) 
         print( 'Finished! Upload output:\n rdlyc_{}_{}.json'.format(nini,nend) )
+
+if __name__ == "__main__":
+    run()
