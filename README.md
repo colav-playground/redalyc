@@ -23,3 +23,11 @@ and git: https://git-scm.com/downloads
 
 Then opens the Anaconda prompt and execute the previous commands
 
+
+TODO:
+
+Try:
+```
+conda install -c conda-forge python-levenshtein
+```
+
