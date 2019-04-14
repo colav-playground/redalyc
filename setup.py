@@ -6,8 +6,7 @@ setup(
     install_requires=[
         'requests',
         'pandas',
-        'bs4',
-        'python-levenshtein'
+        'bs4'
     ],
     entry_points={
         'console_scripts': [
