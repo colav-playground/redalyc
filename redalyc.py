@@ -1,4 +1,8 @@
-import Levenshtein # pip3 install python-levenshtein
+QUALITY=True
+try:
+   import Levenshtein # pip3 install python-levenshtein
+except ImportError:
+    QUALITY=False
 import re
 from bs4 import BeautifulSoup
 import requests
@@ -214,7 +218,10 @@ def google_scholar_query(title='', author='', coauthors=[], DOI='', year=0, publ
     if gs and author:
         sau=0
         for a in gs['authors'].split(','):
-            saun=Levenshtein.ratio(author.lower(),a.lower().strip())
+            if QUALITY:            
+               saun=Levenshtein.ratio(author.lower(),a.lower().strip())
+            else:
+               saun=0
             if saun>sau:
                 sau=saun
                 
@@ -223,8 +230,11 @@ def google_scholar_query(title='', author='', coauthors=[], DOI='', year=0, publ
         gs['quality_author']=-1 #-1 means not checked
         
     if gs and title:
-        gs['quality_title']=round( Levenshtein.ratio(
+        if QUALITY:    
+            gs['quality_title']=round( Levenshtein.ratio(
                    title.lower(),gs['title'].lower() ),2 )
+        else:
+            gs['quality_title'] =-1 #-1 means not checked
     else:
         gs['quality_title'] =-1 #-1 means not checked
         
