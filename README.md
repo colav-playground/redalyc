@@ -12,6 +12,7 @@ and run as
 ```
 redalyc
 ```
+by writing it in the command-prompt.
 
 WINDOWS USERS: Install first Anaconda: https://www.anaconda.com/distribution/
 
