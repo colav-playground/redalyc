@@ -18,7 +18,7 @@ WINDOWS USERS: Install first Anaconda: https://www.anaconda.com/distribution/
 
 and git: https://git-scm.com/downloads
 
-Then opens the Anaconda prompt and execute the previous commands
+Then opens the Anaconda command-prompt and execute the previous commands
 
 
 TODO:
