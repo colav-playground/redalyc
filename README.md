@@ -2,15 +2,11 @@ Get GoogleScholar info from a database with lookup metadata:
 
 Lookup search example: http://bit.ly/gslookup
 
-INSTALL:
+INSTALL*:
 ```bash
 pip install -e git+https://github.com/colav/redalyc.git#egg=redalyc
 ```
-LONG WAY:
-```bash
-git clone https://github.com/colav/redalyc.git
-pip install -e redalyc
-```
+
 
 and run as 
 ```
@@ -29,5 +25,11 @@ TODO:
 Try:
 ```
 conda install -c conda-forge python-levenshtein
+```
+
+LONG WAY TO INSTALL:
+```bash
+git clone https://github.com/colav/redalyc.git
+pip install -e redalyc
 ```
 
