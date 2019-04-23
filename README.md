@@ -27,7 +27,7 @@ Try:
 conda install -c conda-forge python-levenshtein
 ```
 
-LONG WAY TO INSTALL:
+*LONG WAY TO INSTALL:
 ```bash
 git clone https://github.com/colav/redalyc.git
 pip install -e redalyc
